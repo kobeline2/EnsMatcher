@@ -5,37 +5,80 @@
 ## 📁 ディレクトリ構成
 <pre>
    MyApp/
-   ├── config/             # 各処理ステップの設定ファイル（YAML形式）
-   │   ├── preprocess.yaml     # Xの前処理設定
-   │   ├── compute.yaml        # Wの計算設定（X'とY）
-   │   └── evaluate.yaml       # WとZの比較・評価設定
+   ├── config/    
+   │   ├── preprocess.yaml         # 準備データ作成
+   │   ├── compute.yaml            # マッチング
+   │   └── evaluate.yaml           # 評価設定
    │
-   ├── data/               # 入力データ（X, Y, Z）を格納
-   │   ├── X/                  # 元データ X
-   │   ├── Y/                  # 元データ Y
-   │   └── Z/                  # 評価用データ Z
+   ├── data/             
+   │   ├── d4pdf/                  # D4PDF
+   │   ├── ens/                    # ensemble 
+   │   └── amedas/                 # amedas
    │
-   ├── preprocessed/       # 前処理済みのX'を保存
+   ├── preprocessed/     
    │   └── X_prime/
    │
-   ├── results/            # 処理結果や評価結果を保存
+   ├── res/              
    │   ├── W_values/           # Wの出力
    │   └── evaluation/         # WとZの比較結果
    │
-   ├── src/                # 実装コード
+   ├── src/         
    │   ├── preprocessing/      # Xの前処理関数群
    │   ├── computeW/           # Wの計算関連コード
    │   └── evaluation/         # 評価処理（Zとの比較など）
    │
-   ├── scripts/            # 各ステップの実行スクリプト
+   ├── scripts/          
    │   ├── run_preprocess.m
    │   ├── run_compute.m
    │   └── run_evaluate.m
    │
-   ├── utils/              # 補助関数（ファイル操作、ログ等）
+   ├── utils/            
    │
-   └── README.md           # この説明ファイル
+   └── README.md         
 </pre>
+
+
+
+## 関数の説明
+d4pdf_rainMatrix: 
+
+
+## ⚙️ 処理の流れ
+### 前処理
+1. QGISから手動で流域を抽出
+1. pythonでd4pdfから流域を切り出すためのd4pdf測点に対するティーセン分割をおこなう
+   src/python/src/d4pdf2voronoi.py + config
+1. d4pdfから流域を切り出して, 指定した流域の年N位までのM時間雨量を抽出 → output dat(ファイル数はN×732, 測点数×M行列)
+   src/basin_extraction/d4pdf/d4pdf_rainMatrix.m
+1. pythonでensから流域を切り出すためのens測点に対するティーセン分割をおこなう
+   src/python/src/ensemble2voronoi.py
+1. ensから流域を切り出して, 雨を切り出す → output dat (ファイル数は25（(15-3)/0.5日+1）の初期時刻×51, 測点数×M行列)
+   src/basin_extraction/ensemble/ensemble_rainMatrix.m
+1. pythonでamedasから流域を切り出すためのamedas測点に対するティーセン分割をおこなう
+   src/python/src/kaiseki2voronoi.py
+1. kaisekiから流域を切り出して, 雨を切り出す → output dat (ファイル数は1, 測点数×M行列)
+   src/basin_extraction/kaiseki/kaiseki_rainMatrix.m
+
+### クラスタリング
+1. d4pdfのクラスタリング
+   src/matching/clustering_both.m → output 動画とmatファイルを出力（クラスタ数×（測点数×M時間）行列）
+### マッチング
+1. d4pdfとEnsとのマッチング（ここで解析雨量もマッチングする）
+   src/matching/matching_both.m → output ヒートマップ & 的中率を計算するための情報
+### 検証
+1. 的中率を計算
+   
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## ⚙️ 処理の流れ
