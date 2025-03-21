@@ -1,0 +1,11 @@
+{   
+    "basin_path": "../../../QGIS/yahagi/yahagi_basin.geojson", 
+    "output_path": "../../../QGIS/yahagi/",
+    "epsg": "6675",
+    "Nx": 16,
+    "Ny": 17,
+    "lon_min": 136.84375,
+    "lon_max": 137.84375,
+    "lat_min": 34.675,
+    "lat_max": 35.525
+  }

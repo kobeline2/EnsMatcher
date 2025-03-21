@@ -1,0 +1,10 @@
+{
+    "basin_path": "../../../QGIS/tenryu/tenryu_basin.geojson",
+    "output_path": "../../../QGIS/tenryu/",
+    "nc_path": "../../../kaiseki/kaiseki_location.nc",
+    "epsg": 6676,
+    "lon_min": 137.5,
+    "lon_max": 138.4,
+    "lat_min": 34.6,
+    "lat_max": 36.2
+}
