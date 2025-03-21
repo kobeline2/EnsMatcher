@@ -58,6 +58,7 @@ d4pdf_rainMatrix:
    src/python/src/kaiseki2voronoi.py
 1. kaisekiから流域を切り出して, 雨を切り出す → output dat (ファイル数は1, 測点数×M行列)
    src/basin_extraction/kaiseki/kaiseki_rainMatrix.m
+      ここで, 解析のリサンプリングも行う
 
 ### クラスタリング
 1. d4pdfのクラスタリング
@@ -65,6 +66,7 @@ d4pdf_rainMatrix:
 ### マッチング
 1. d4pdfとEnsとのマッチング（ここで解析雨量もマッチングする）
    src/matching/matching_both.m → output ヒートマップ & 的中率を計算するための情報
+      ここで, アンサンブルのリサンプリングも行う
 ### 検証
 1. 的中率を計算
    
