@@ -1,0 +1,10 @@
+{
+    "basin_path": "../../../QGIS/agano/agano_basin.geojson",
+    "output_path": "../../../QGIS/agano/",
+    "nc_path": "../../../d4PDF/d4PDF_5kmDDS_JP/cnst/cnst.nc",
+    "epsg": 6677,
+    "lon_min": 138.96875,
+    "lon_max": 140.34375,
+    "lat_min": 36.725,
+    "lat_max": 38.025
+}

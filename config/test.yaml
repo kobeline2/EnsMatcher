@@ -1,0 +1,9 @@
+input:
+  path: data/X/raw_X.csv
+  format: csv
+output:
+  path: preprocessed/X_prime.csv
+  overwrite: true
+params:
+  method: normalize
+  range: [0, 1]
