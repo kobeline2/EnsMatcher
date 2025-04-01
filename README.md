@@ -121,9 +121,10 @@ make
 
 
 ## 出力のサイズ
-1. `nHourRain/d4pdf`: cell number(d4pdf) × nHour
-1. `nHourRain/ens`: cell number(ens) × nHour
-1. `nHourRain/kaiseki`: cell number(d4pdf) × nHour (already resampled)
+1. `res/nHourRain/d4pdf`: cell number(d4pdf) × nHour
+1. `res/nHourRain/ens`: cell number(ens) × nHour
+1. `res/nHourRain/kaiseki`: cell number(d4pdf) × nHour (already resampled)
+1. `res/clustered/`: (cell number × nHour) × cluster number
 
 
 
