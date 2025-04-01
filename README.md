@@ -111,3 +111,20 @@ output: preprocessed/X_prime/processed.csv
 method: standardize
 params:
   window_size: 10
+
+
+
+## 個々の関数の説明
+### runExtractRainGrib
+grib形式の解析雨量データをMATLABで読めるように展開するコード.
+内部ではc++が回っているので, 事前にOSに合わせてmakeする必要がある.
+src/cpp/codeに移動し,
+　```
+make clean
+make
+　```
+
+
+
+
+
