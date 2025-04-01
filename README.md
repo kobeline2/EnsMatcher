@@ -99,17 +99,37 @@ d4pdf_rainMatrix:
    - `scripts/run_evaluate.m` を実行
    - 設定ファイル: `config/evaluate.yaml`
    - 出力先: `results/evaluation/`
+
+
   
 ## 個々の関数の説明
 ### runExtractRainGrib
 grib形式の解析雨量データをMATLABで読めるように展開するコード.
 内部ではc++が回っているので, 事前にOSに合わせてmakeする必要がある.
-src/cpp/codeに移動し,
-　```
+`src/cpp/code`に移動し,
+<pre>
 make clean
 make
-　```
+</pre>
  ### runExtractRainGrib
+
+
+
+
+
+
+
+
+## 出力のサイズ
+1. `nHourRain/d4pdf`: cell number(d4pdf) × nHour
+1. `nHourRain/ens`: cell number(ens) × nHour
+1. `nHourRain/kaiseki`: cell number(d4pdf) × nHour (already resampled)
+
+
+
+
+
+
 
 ## 📝 YAML設定について
 
