@@ -99,6 +99,17 @@ d4pdf_rainMatrix:
    - `scripts/run_evaluate.m` を実行
    - 設定ファイル: `config/evaluate.yaml`
    - 出力先: `results/evaluation/`
+  
+## 個々の関数の説明
+### runExtractRainGrib
+grib形式の解析雨量データをMATLABで読めるように展開するコード.
+内部ではc++が回っているので, 事前にOSに合わせてmakeする必要がある.
+src/cpp/codeに移動し,
+　```
+make clean
+make
+　```
+ ### runExtractRainGrib
 
 ## 📝 YAML設定について
 
@@ -114,15 +125,7 @@ params:
 
 
 
-## 個々の関数の説明
-### runExtractRainGrib
-grib形式の解析雨量データをMATLABで読めるように展開するコード.
-内部ではc++が回っているので, 事前にOSに合わせてmakeする必要がある.
-src/cpp/codeに移動し,
-　```
-make clean
-make
-　```
+
 
 
 
