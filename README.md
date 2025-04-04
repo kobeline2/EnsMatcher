@@ -39,10 +39,6 @@
 
 
 
-## 関数の説明
-d4pdf_rainMatrix: 
-
-
 ## ⚙️ 処理の流れ
 ### 前処理
 
@@ -80,7 +76,7 @@ d4pdf_rainMatrix:
 ### 前処理
 1. **初期化**
    - `EnsMatcher`に移動し, `init`とMATLABで打ち込む. 
-
+   - `getConfig.m`に必要情報を記入する. 
 1. **流域のシェープファイルを作る(GIS)**
    - GISなどを用いて作る. フォーマットはgeojsonにしておく. 
    - 保存先: `data/geo/miya/basin.geojson`
@@ -135,8 +131,9 @@ make
 
 1. **解析雨量から流域を切り出して, 雨を切り出す**
 - 設定ファイル: `config/rain_extraction.yaml`
-- ensembleデータ(Y年M月D日H時間からnHourRain時間分)からbasin流域を抽出する. 
-kaisekiから流域を切り出して, 雨を切り出す
+- 解析雨量からtargetTimeからnHourRain時間分データを切り出しす. 
+- 解析雨量のd4pdf計算点に対するリサンプリングもこの中で行う. 
+リサンプリングの過程で, 流域抽出も行われる. 
 - output dat (ファイル数は1, 測点数×M行列)
 - 実行方法
 <pre>
@@ -144,8 +141,40 @@ pathConfig = 'config/rain_extraction.yaml'
 runRainExtraction(pathConfig)
 % runRainExtraction(pathConfig, 'debug') % debug時. test/の中のデータがまわる.
 </pre>
-- 出力先: `res/nHourRain/ens/miya`
+- 出力先: `res/nHourRain/kaiseki/miya`
   
+### Clustering
+- 設定ファイル: `config/clustering.yaml`
+- 例えばnHourRain=72の場合, `res/nHourRain/d4pdf/miya/72hours`配下にある1~maxRankデータを用いたクラスタリングを行う. 
+- 実行方法
+<pre>
+pathConfig = 'config/clustering.yaml';
+const = getConfig();
+% const = getConfig('debug'); % debug時. test/の中のデータがまわる.
+cfg = readyaml(pathConfig);
+clusteringSpatioTemp(cfg, const)
+% clusteringSpatioTemp(pathConfig, const) 
+</pre>
+- 出力先: `res/clustered/miya/spatioTemp/72hours`配下にクラスタリング結果と, そのメタ情報をいれたconfigファイルが拡張子以外同名で出力される.
+
+### Matching
+- 設定ファイル: `config/matching.yaml`
+- 例えばnHourRain=72の場合, `res/nHourRain/d4pdf/miya/72hours`配下にある1~maxRankデータを用いたクラスタリングを行う. 
+- 実行方法
+<pre>
+pathConfig = 'config/clustering.yaml';
+const = getConfig();
+% const = getConfig('debug'); % debug時. test/の中のデータがまわる.
+cfg = readyaml(pathConfig);
+clusteringSpatioTemp(cfg, const)
+% clusteringSpatioTemp(pathConfig, const) 
+</pre>
+- 出力先: `res/clustered/miya/spatioTemp/72hours`配下にクラスタリング結果と, そのメタ情報をいれたconfigファイルが拡張子以外同名で出力される.
+
+### Postprocessing
+
+
+
 ## 個々の関数の説明
 ### runExtractRainGrib
 grib形式の解析雨量データをMATLABで読めるように展開するコード.
