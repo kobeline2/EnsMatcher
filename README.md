@@ -216,3 +216,19 @@ output: preprocessed/X_prime/processed.csv
 method: standardize
 params:
   window_size: 10
+```
+
+## memo
+target event X basin
+20200701 21:00
+
+kaiseki 
+“2020070012100”
+2020/0701 - 2020/0704 kaiseki data
+
+ensemble
+20200701 21:00 - 12days(72 hours)
+|
+20200701 21:00
+Xbasin ensemble data
+
