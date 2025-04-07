@@ -5,7 +5,7 @@ function init()
 
     % サブディレクトリ一覧
     subdirs = {
-        'src/preprocessing'
+        'src/clustering'
         'src/basin_extraction'
         'src/matching'
         'src/evaluation'

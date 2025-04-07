@@ -1,0 +1,13 @@
+# === common ===
+basin: 'miya'        # 流域
+nHourRain: 72        # 対象期間(hours)
+makeMovie: 0 #
+
+# === クラスリング ===
+method: 'kmeans'     # 'kmeans', 'ward', 'cos'
+nCluster: 3          # 作成するクラスターの数
+optKmethod: "Silhouette"  # {"manual", "Silhouette", "elbow"}
+maxRank: 3           # 年何位までの雨量を用いるか(1~5)
+random: 1            # true にするとシードは無視して乱数シードをシャッフルする
+seed: 42             # random が false の場合に使う固定シード
+

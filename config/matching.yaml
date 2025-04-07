@@ -1,0 +1,13 @@
+# === common ===
+basin: 'miya'        # 流域
+nHourRain: 72        # 対象期間(hours)
+
+matchingMethod: 'euclid' # 'euclid', 'cos'
+targetTime: "201710202100" # "201809040900","202208032100","202308130900" 対象期間の開始時刻 "yyyyMMddHHmm"
+filterMethod: 'none' # 'none', 'threshold'
+makeMovie: 0 #
+
+# === 使用するクラスリングデータ ===
+clusteredFilepath: 'test/res/clustered/miya/spatioTemp/72hours/kmeans3_manual.dat'
+
+

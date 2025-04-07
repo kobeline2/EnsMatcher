@@ -1,0 +1,32 @@
+# === common ===
+datatype: 'kaiseki'      # {d4pdf, ens, kaiseki}
+basin: 'miya'        # 流域
+nHourRain: 72        # 求めたい最大雨量の期間(hours,3日=>72, 15日=>360)
+rank: 5              # 年何位までの雨量が欲しいか
+
+# === d4pdf ===
+yearStart: 1952      # 雨量を抽出する最初の年(1950~2010)
+yearEnd: 1953        # 雨量を抽出する最後の年(1950~2010,yend>=ystart)
+saveD4pdfbasinRain: 'true' # d4pdfの流域抽出後データをmatファイルで保存するか?
+
+
+
+
+# === ens ===
+Y: 2017            # 対象期間の開始年
+M: 9               # 対象期間の開始月
+D: 30               # 対象期間の開始日
+H: 21              # 対象期間の開始時(9 or 21)
+
+# === kaiseki ===
+targetTime: '201709302100' # 対象期間の開始時刻(日本時間)'yyyyMMddHHmm'
+outGif: 'false'
+
+# === seldom changed parameters ===
+# d4pdf
+memStart: 2          # 雨量を抽出する最初のd4PDFのメンバー(通常は1)
+memEnd: 3            # 雨量を抽出する最後のd4PDFのメンバー(通常は12, mend>=mstart)
+# ens
+memEnsStart: 1        # 通常は1
+memEnsEnd: 4          # 通常は51  
+# kaiseki

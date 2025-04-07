@@ -4,6 +4,7 @@ config.m
 res/
 old/
 data/
+test/
 temp.m
 
 # Windows default autosave extension
