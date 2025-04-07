@@ -6,6 +6,7 @@ old/
 data/
 test/
 temp.m
+src/cpp/materials/kaiseki_location.nc
 
 # Windows default autosave extension
 *.asv
