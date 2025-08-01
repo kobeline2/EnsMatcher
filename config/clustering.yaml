@@ -7,7 +7,7 @@ makeMovie: 0 #
 method: 'kmeans'     # 'kmeans', 'ward', 'cos'
 nCluster: 3          # 作成するクラスターの数
 optKmethod: "Silhouette"  # {"manual", "Silhouette", "elbow"}
-maxRank: 3           # 年何位までの雨量を用いるか(1~5)
+maxRank: 5           # 年何位までの雨量を用いるか(1~5)
 random: 1            # true にするとシードは無視して乱数シードをシャッフルする
 seed: 42             # random が false の場合に使う固定シード
 

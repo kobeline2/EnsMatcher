@@ -1,4 +1,4 @@
-function clusteringSpatioTemp(cfg, const)
+function [idx, centers, bestK, rain] = clusteringSpatioTemp(cfg, const)
 %%% d4PDFの時空間分布のクラスタリング %%%
 
 %% 1.パラメータの設定
@@ -47,25 +47,5 @@ centers = centers(idxTmp, :);           % そのインデックスに基づい�
 writeMatrixToDir(centers', dirOut, strcat(fnOut, '.dat'));
 outputCfgAsJson(strcat(fnOut, '.json'), dirOut, cfg)
 
-%% 動画作成, 保存
-if cfg.makeMovie
-    % 各クラスターに分類されたrainの個数を取得
-    nPerCluster = zeros(1,cfg.nCluster); % 配列の事前割り当て
-    for iCluster = 1:cfg.nCluster
-        nPerCluster(iCluster) = nnz(idx==iCluster);
-    end
-    % d4PDFの計算点の緯度経度を取得
-    fn = fullfile(const.path.d4pdf, 'cnst', 'location.csv');
-    tmp = readmatrix(fn, "NumHeaderLines", 1);
-    lonD4pdf = tmp(idD4pdfcell, 5); % 経度
-    latD4pdf = tmp(idD4pdfcell, 4); % 緯度
-    outMovieFile = fullfile(const.path.outClustered, ...
-                            cfg.basin, ...
-                            sprintf('%dhours', nHourRain), ...
-                            'clustering', 'both', ...
-                            sprintf('%s_clustering_both_%d_%s.mp4', ...
-                                    cfg.basin,cfg.nCluster,cfg.method));
-    saveMovieClustered(outMovieFile)
-end
 end
 

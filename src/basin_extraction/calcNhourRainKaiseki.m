@@ -4,7 +4,7 @@ function calcNhourRainKaiseki(cfg, const)
 %   calcNhourRainD4PDF(pathConfig, varargin)
 %
 % Description:
-%   気象庁解析雨量から指定した流域の雨を抽出する → resampling → 動画作成
+%   気象庁解析雨量から指定した流域の雨を抽出する → resampling
 % 
 % Input Arguments:
 %   cfg  - rain_extraction.yaml
@@ -33,7 +33,8 @@ DX = 0.0125; % x(経度)方向の格子点の間隔
 DY = 1/120;  % y(緯度)方向の格子点の間隔
 
 nHourRain = cfg.nHourRain; % 雨の期間
-outPath = fullfile(const.path.outNhourRain, 'kaiseki', cfg.basin, nHourRain);
+outPath = fullfile(const.path.outNhourRain, 'kaiseki', cfg.basin,...
+                   sprintf('%shours', num2str(nHourRain)));
 
 
 % 解析雨量, d4PDFの格子点の緯度経度を取得(resamplingの準備)
@@ -79,14 +80,6 @@ end
 % resampledRainをdatファイルに出力
 outFn = sprintf('%s.dat', num2str(cfg.targetTime));
 writeMatrixToDir(resampledRain, outPath, outFn)
-
-% 地図に色塗り → 動画作成
-if cfg.outGif
-    outFn = fullfile(outPath, ...
-                     sprintf('%s.mp4', cfg.targetTime));
-    makeGifKaiseki(outFn, resampledRain, cfg.targetTime, latD4pdf, lonD4pdf)
-end
-
 
 end
 

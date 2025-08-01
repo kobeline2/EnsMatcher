@@ -57,8 +57,8 @@ parfor iMember = cfg.memStart:cfg.memEnd
         for I = 1:cfg.rank
             % n時間の雨を1時間ごとに出力(n時間雨量の最大値をファイル名に入れる)
             outDir = fullfile(outPath, num2str(I));
-            outFn  = sprintf('%.3fmm_HPB_m%03d_%s.dat', ...
-                             sums(I) ,iMember ,dailyTimes(idx(I)));
+            outFn  = sprintf('m%03d_%s_%.0fmm.dat', ...
+                             iMember ,dailyTimes(idx(I)), sums(I));
             writeMatrixToDir(rain(:, idx(I):idx(I)+nHourRain-1), ...
                              outDir, outFn)
         end

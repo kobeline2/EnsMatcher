@@ -17,7 +17,7 @@ if exist(d4pdfBasinFn, 'file')
 else
     % なければ, rain.ncを読んで流域領域を切り出す
     fn = fullfile(const.path.d4pdf, memberDir, num2str(iYear), 'hourly', 'rain.nc');
-    numHourInYear = 8760 + 24*leapyear(iYear+1);
+    numHourInYear = 8760 + 24 * isLeapYear(iYear+1);
     rain = ncread(fn, 'rain', ...
                   [1,   1,   1, 929], ...
                   [Inf, Inf, 1, numHourInYear]);

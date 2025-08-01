@@ -34,7 +34,7 @@ outPath = fullfile(const.path.outNhourRain, ...
                    sprintf('%04d%02d%02d%02d00', Y, M, D, H));
 
 % アンサンブル予測のグリッド情報取得
-fn = fullfile(const.path.ens, cfg.basin, ...
+fn = fullfile(const.path.ens, cfg.basin, num2str(Y),...
               sprintf('%04d%02d%02d%02d00_01.csv', Y, M, D, H));
 rain = readmatrix(fn, 'NumHeaderLines', 0, 'Delimiter', ',');
 nRow = rain(1, 13); % アンサンブル予測のグリッドの行数
@@ -48,14 +48,14 @@ for initTimeIdx = 1:31-nHourRain/12 % 初期時刻(31 = 1+(15日/0.5日))
     
     for iMember = cfg.memEnsStart:cfg.memEnsEnd
         % 雨量の読み込み
-        fn = fullfile(const.path.ens, cfg.basin, ...
+        fn = fullfile(const.path.ens, cfg.basin, num2str(Y), ...
                       sprintf('%s_%02d.csv', initTime, iMember));
         rain = readmatrix(fn, 'NumHeaderLines', 0, 'Delimiter',',');
         isRain = mod(1:length(rain), nRow+1) ~= 1; % 雨量が格納されている行番号を取得
         rain = rain(isRain, 1:nCol); % 雨量のみの行列を作成
         
         % rainデータは(nRow*nHour)*nColという二次元データ. 
-        % これをnHour*(nRow*nHour)に変換し, 必要な時間データを抽出する(最終行). 
+        % これを(nRow*nCol)*nHourに変換し, 必要な時間データを抽出する(最終行). 
         numHours = length(rain)/nRow;
         rain = reshape(rain, nRow, numHours, nCol);
         rain = permute(rain, [1, 3, 2]);
@@ -66,7 +66,10 @@ for initTimeIdx = 1:31-nHourRain/12 % 初期時刻(31 = 1+(15日/0.5日))
         outFn = sprintf('%s_%03d.dat', initTime, iMember);
         writeMatrixToDir(rain, outPath, outFn);
     end
-    
+    % logging
+    fprintf('%s has been output successfully at %s\n', ...
+            initTime, datetime('now','Format','MM/dd HH:mm:ss'))
+
     % 初期時刻の更新(-12h)
     [Y, M, D, H] = updateDatetime(datetime(Y, M, D, H, 00, 00), -hours(12));
 
