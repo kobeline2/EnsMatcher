@@ -32,7 +32,7 @@ nHour = size(R,2);
 
 % clim
 if nargin < 5 || isempty(clim)
-    clim = [0, max(R(:))];
+    clim = [0, 0.75*max(R(:))];
 end
 assert(numel(clim)==2 && clim(1) <= clim(2), 'clim must be [cmin cmax].');
 
@@ -43,20 +43,43 @@ mp4Path = fullfile(outDir, base + "_hourly.mp4");
 % video writer
 vw = VideoWriter(mp4Path, 'MPEG-4');
 vw.FrameRate = fps;
+vw.Quality   = 95;   % 0-100, higher = better (and larger)
 open(vw);
 
 % figure (off-screen)
-fig = figure('Visible','off');
+% --- choose a reasonable "paper-like" video size (pixels)
+vidWH = [600 600];              % width x height, adjust as you like
+vidWH = 2*ceil(vidWH/2);         % make even numbers (safer for H.264)
+
+% figure (off-screen) with fixed pixel size
+fig = figure('Visible','off', 'Units','pixels', ...
+             'Position',[50 50 vidWH(1) vidWH(2)], ...
+             'Color','w');
 ax = axes(fig);
 
-hSc = scatter(ax, lonD4pdf, latD4pdf, 10, R(:,1), 'filled');
+% % optional: make axes layout stable (leave room for colorbar)
+% ax.Units = 'normalized';
+% ax.Position = [0.12 0.10 0.7 0.82];   % [left bottom width height]
+
+% rough estimate of point spacing (in degrees)
+dx = median(abs(diff(sort(unique(lonD4pdf)))));
+dy = median(abs(diff(sort(unique(latD4pdf)))));
+d  = min(dx, dy);
+% map spacing to marker size (empirical)
+sz = d*24000;  
+
+hSc = scatter(ax, lonD4pdf, latD4pdf, sz, R(:,1),...
+    's', 'filled', ...
+    'MarkerEdgeColor','none', ...
+    'MarkerFaceAlpha', 0.95);
 axis(ax, 'equal');
 axis(ax, 'tight');
 set(ax, 'YDir', 'normal');
-grid(ax, 'on');
+% grid(ax, 'on');
 xlabel(ax, 'Longitude [deg]');
 ylabel(ax, 'Latitude [deg]');
 caxis(ax, clim);
+colormap turbo;
 cb = colorbar(ax);
 ylabel(cb, 'Rainfall [mm/h]');
 fig.Color = 'w';
@@ -65,14 +88,15 @@ ax.XColor = 'k';
 ax.YColor = 'k';
 ax.ZColor = 'k';
 cb.Color = 'k';
+% set(findall(fig,'Type','text'), 'Color','k');
 
 % render frames
 for tt = 1:step:nHour
-    hSc.CData = R(:,tt);
+    hSc.CData = R(:, tt);
 
     tLabel = tStartJST + hours(tt); % 表示用. 解析雨量の右端時刻ラベルに合わせたいなら +hours(tt)のままでOK
     title(ax, sprintf('%s, h=%d/%d, JST %s, clim=[%g,%g]', ...
-        base, tt, nHour, char(tLabel,'yyyy-MM-dd HH:mm'), clim(1), clim(2)));
+        base, tt, nHour, char(tLabel,'yyyy-MM-dd HH:mm'), clim(1), clim(2)), 'Color', 'k');
 
     drawnow;
     frame = getframe(fig);

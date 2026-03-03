@@ -20,19 +20,15 @@ else
     const.nEns = 4;
     const.leadtimeEns = 15; % days
     %%% preprocessing
-    const.path.geo = fullfile('test', 'data', 'geo');
-    const.path.outNhourRain = fullfile('test', 'res', 'nHourRain');
-    const.path.d4pdf        = fullfile('test', 'data', 'd4pdf', 'd4PDF_5kmDDS_JP');
-    % const.path.d4pdf        = '/Volumes/koshiba/data/DAT/d4pdf/d4PDF_5kmDDS_JP';
-    % const.path.ens     = fullfile('test', 'data', 'ens');
-    const.path.ens        = fullfile('test', 'data', 'ens');
-    const.path.kaiseki = fullfile('test', 'data', 'kaiseki', 'Data');
+    const.path.geo = '~/Dropbox/git_ignored/EnsMatcher/test/data/geo';
+    const.path.outNhourRain = '~/Dropbox/git_ignored/EnsMatcher/test/res/nHourRain';
+    const.path.d4pdf = '~/Dropbox/git_ignored/EnsMatcher/test/data/d4pdf/d4PDF_5kmDDS_JP';    
+    const.path.ens = '~/Dropbox/git_ignored/EnsMatcher/test/data/ens';
+    const.path.kaiseki = '~/Dropbox/git_ignored/EnsMatcher/test/data/kaiseki/Data';
     %%% clustering 
-    const.path.outClustered = fullfile('test', 'res', 'clustered');
-
+    const.path.outClustered = '~/Dropbox/git_ignored/EnsMatcher/test/res/clustered';
     %%% matching
-    const.path.outMatched = fullfile('test', 'res', 'matched');
-
+    const.path.outMatched = '~/Dropbox/git_ignored/EnsMatcher/test/res/matched';
     %%% postprocessing
 
     
