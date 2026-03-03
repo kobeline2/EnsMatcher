@@ -1,0 +1,30 @@
+気象庁解析雨量の解読方法
+
+＜参考＞
+http://www.eqh.dpri.kyoto-u.ac.jp/~masumi/sac/grib2.htm
+https://sumisumi.cocolog-nifty.com/sumisumi/files/Rader-AME.pdf
+
+1. 防災研サーバーから，DOCフォルダとSAMPLE_Cフォルダをコピーしてくる
+***必ずgranite上で行う***
+scp -r -oHostKeyAlgorithms=+ssh-rsa -oKexAlgorithms=+diffie-hellman-group1-sha1 guest@10.244.84.226:/gluster/data/Radar_AMeDAS/2020/DOC ./アンサンブル予測/kaiseki
+scp -r -oHostKeyAlgorithms=+ssh-rsa -oKexAlgorithms=+diffie-hellman-group1-sha1 guest@10.244.84.226:/gluster/data/Radar_AMeDAS/2020/SAMPLE_C ./アンサンブル予測/kaiseki
+***必ずgranite上で行う***
+Password: Esouse128d
+
+2. 欲しい年月日時の解析雨量のbinファイルをコピーしてくる(./bin/kaiseki_copy.sh)
+***必ずgranite上で行う***
+scp -oHostKeyAlgorithms=+ssh-rsa -oKexAlgorithms=+diffie-hellman-group1-sha1 guest@10.244.84.226:/gluster/data/Radar_AMeDAS/2020/DATA/2020/10/22/Z__C_RJTD_20201022220000_SRF_GPV_Ggis1km_Prr60lv_ANAL_grib2.bin ./アンサンブル予測/kaiseki/DATA
+***必ずgranite上で行う***
+Password: Esouse128d
+
+3. SAMPLE_C/sample_decode.hのコメントを消す
+/* (←これを消す）
+#define IS_LITTLE_ENDIAN
+*/ (←これを消す
+
+4. コンパイル
+SAMPLE_Cフォルダ内でmakeと入力してコンパイルする
+
+5. grib2_decを実行(./bin/kaiseki_extract.sh)
+./grib2_dec ../DATA/Z__C_RJTD_20201022220000_SRF_GPV_Ggis1km_Prr60lv_ANAL_grib2.bin
+4バイト整数配列のbinファイルとして出力される
