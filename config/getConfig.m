@@ -20,15 +20,15 @@ else
     const.nEns = 4;
     const.leadtimeEns = 15; % days
     %%% preprocessing
-    const.path.geo = '~/Dropbox/git_ignored/EnsMatcher/test/data/geo';
-    const.path.outNhourRain = '~/Dropbox/git_ignored/EnsMatcher/test/res/nHourRain';
-    const.path.d4pdf = '~/Dropbox/git_ignored/EnsMatcher/test/data/d4pdf/d4PDF_5kmDDS_JP';    
-    const.path.ens = '~/Dropbox/git_ignored/EnsMatcher/test/data/ens';
-    const.path.kaiseki = '~/Dropbox/git_ignored/EnsMatcher/test/data/kaiseki/Data';
+    const.path.geo = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/data/geo';
+    const.path.outNhourRain = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/res/nHourRain';
+    const.path.d4pdf = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/data/d4pdf/d4PDF_5kmDDS_JP';    
+    const.path.ens = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/data/ens';
+    const.path.kaiseki = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/data/kaiseki/Data';
     %%% clustering 
-    const.path.outClustered = '~/Dropbox/git_ignored/EnsMatcher/test/res/clustered';
+    const.path.outClustered = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/res/clustered';
     %%% matching
-    const.path.outMatched = '~/Dropbox/git_ignored/EnsMatcher/test/res/matched';
+    const.path.outMatched = '~/Library/CloudStorage/Dropbox/git_ignored/EnsMatcher/test/res/matched';
     %%% postprocessing
 
     

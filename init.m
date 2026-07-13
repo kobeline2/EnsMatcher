@@ -8,9 +8,9 @@ function init()
         'src/clustering'
         'src/basin_extraction'
         'src/matching'
-        'src/evaluation'
         'src/visualize'
         'util'
+        'config'
     };
 
     % 各サブディレクトリをフルパスに変換し、パスに追加

@@ -192,3 +192,15 @@ preprocessed/
 temp.m
 src/cpp/materials/kaiseki_location.nc
 src/python/venv
+# ===== baseline (cleanup) =====
+.DS_Store
+.dropboxignore
+*conflicted copy*
+*Conflicted Copy*
+untitled*.m
+*.asv
+matlab_workspace.mat
+__pycache__/
+*.pyc
+.venv/
+*.dSYM/
